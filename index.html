@@ -3,49 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feed Page</title>
+    <title>Social Feed Application</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>My Feed</h1>
-        <div class="search-bar">
-            <input type="text" placeholder="Search..." />
-            <button>Search</button>
-        </div>
-        <div class="profile-actions">
-            <button>Follow</button>
-            <button>Unfollow</button>
-        </div>
+        <h1>Social Feed</h1>
+        <input type="text" id="search" placeholder="Search...">
     </header>
     <main>
-        <section class="friend-management">
-            <h2>Manage Friends</h2>
-            <button>Add Friend</button>
-            <button>Remove Friend</button>
+        <section id="feed">
+            <h2>Feed</h2>
+            <div class="post" id="post-template" style="display:none;">
+                <h3 class="post-author"></h3>
+                <p class="post-content"></p>
+                <button class="follow-button"></button>
+                <hr>
+            </div>
+            <!-- Feed posts will be populated here -->
         </section>
-        <section class="followers">
+        <section id="friends-management">
+            <h2>Friends</h2>
+            <button id="add-friend">Add Friend</button>
+            <div id="friends-list"></div>
+        </section>
+        <section id="followers">
             <h2>Followers</h2>
-            <ul>
-                <li>Follower 1</li>
-                <li>Follower 2</li>
-            </ul>
+            <div id="followers-list"></div>
         </section>
-        <section class="following">
+        <section id="following">
             <h2>Following</h2>
-            <ul>
-                <li>Following 1</li>
-                <li>Following 2</li>
-            </ul>
+            <div id="following-list"></div>
         </section>
     </main>
     <footer>
-        <p>Profile Interactions</p>
-        <div class="interaction-buttons">
-            <button>Like</button>
-            <button>Comment</button>
-            <button>Share</button>
-        </div>
+        <p>&copy; 2026 Social Feed Application</p>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
