@@ -1,0 +1,87 @@
+/** General Resets */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Responsive Font Sizes */
+h1, h2, h3 {
+    margin-bottom: 20px;
+}
+h1 {
+    font-size: 2.5em;
+}
+h2 {
+    font-size: 2em;
+}
+h3 {
+    font-size: 1.5em;
+}
+
+/* Search Bar */
+.search-bar {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.search-bar:focus {
+    border-color: #007BFF;
+}
+
+/* Follow/Unfollow Buttons */
+.follow-button, .unfollow-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.unfollow-button {
+    background-color: #dc3545; /* Red for unfollow */
+}
+.follow-button:hover, .unfollow-button:hover {
+    opacity: 0.8;
+}
+
+/* Friends List and Followers/Following Sections */
+.friend-list, .followers, .following {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 0;
+}
+.friend-item {
+    flex: 1 1 100%; /* Full width on mobile */
+    margin: 10px;
+    padding: 15px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Responsive Media Queries */
+@media (min-width: 600px) {
+    .friend-item {
+        flex: 1 1 calc(33% - 20px); /* 3 items per row on larger screens */
+    }
+}
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
+    .search-bar {
+        margin: 0 10px;
+    }
+}
