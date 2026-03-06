@@ -4,41 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Social Feed Application</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { display: flex; justify-content: space-between; padding: 10px; background-color: #4CAF50; color: white; }
+        input[type="text"] { padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+        button { padding: 10px; background-color: #008CBA; color: white; border: none; cursor: pointer; }
+        .container { padding: 20px; }
+        .profile { border: 1px solid #ccc; padding: 10px; margin: 10px 0; }
+        .friends-list, .follower-list, .following-list { list-style-type: none; padding: 0; }
+        @media (max-width: 600px) { header { flex-direction: column; } }
+    </style>
 </head>
 <body>
     <header>
         <h1>Social Feed</h1>
-        <input type="text" id="search" placeholder="Search...">
+        <input type="text" id="search" placeholder="Search users..." />
+        <button onclick="searchUsers()">Search</button>
     </header>
-    <main>
-        <section id="feed">
-            <h2>Feed</h2>
-            <div class="post" id="post-template" style="display:none;">
-                <h3 class="post-author"></h3>
-                <p class="post-content"></p>
-                <button class="follow-button"></button>
-                <hr>
-            </div>
-            <!-- Feed posts will be populated here -->
-        </section>
-        <section id="friends-management">
-            <h2>Friends</h2>
-            <button id="add-friend">Add Friend</button>
-            <div id="friends-list"></div>
-        </section>
-        <section id="followers">
-            <h2>Followers</h2>
-            <div id="followers-list"></div>
-        </section>
-        <section id="following">
-            <h2>Following</h2>
-            <div id="following-list"></div>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2026 Social Feed Application</p>
-    </footer>
-    <script src="script.js"></script>
+    <div class="container">
+        <div id="userProfiles"></div>
+    </div>
+    <script>
+        const users = [];
+        const userProfilesElement = document.getElementById('userProfiles');
+
+        function renderUsers() {
+            userProfilesElement.innerHTML = '';
+            users.forEach(user => {
+                const profileDiv = document.createElement('div');
+                profileDiv.className = 'profile';
+                profileDiv.innerHTML = `<h2>${user.name}</h2>\n                    <p>Followers: ${user.followers.length} - Following: ${user.following.length}</p>\n                    <button onclick='followUnfollowUser(${user.id})'>${user.following.includes(currentUserId) ? 'Unfollow' : 'Follow'}</button>`;
+                userProfilesElement.appendChild(profileDiv);
+            });
+        }
+
+        function searchUsers() {
+            const searchTerm = document.getElementById('search').value.toLowerCase();
+            const filteredUsers = users.filter(user => user.name.toLowerCase().includes(searchTerm));
+            userProfilesElement.innerHTML = '';
+            filteredUsers.forEach(user => {
+                const profileDiv = document.createElement('div');
+                profileDiv.className = 'profile';
+                profileDiv.innerHTML = `<h2>${user.name}</h2>\n                    <p>Followers: ${user.followers.length} - Following: ${user.following.length}</p>\n                    <button onclick='followUnfollowUser(${user.id})'>${user.following.includes(currentUserId) ? 'Unfollow' : 'Follow'}</button>`;
+                userProfilesElement.appendChild(profileDiv);
+            });
+        }
+
+        function followUnfollowUser(userId) {
+            const user = users.find(u => u.id === userId);
+            if (user.following.includes(currentUserId)) {
+                user.following = user.following.filter(id => id !== currentUserId);
+            } else {
+                user.following.push(currentUserId);
+            }
+            renderUsers();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sample data
+            users.push({ id: 1, name: 'Alice', followers: [], following: [] });
+            users.push({ id: 2, name: 'Bob', followers: [], following: [] });
+            // You can add more users
+            renderUsers();
+        });
+    </script>
 </body>
 </html>
